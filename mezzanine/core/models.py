@@ -485,7 +485,7 @@ class Ownable(models.Model):
     """
 
     user = models.ForeignKey(user_model_name, verbose_name=_("Author"),
-        related_name="%(class)ss")
+        related_name="%(class)ss", null=True, blank=True)
 
     class Meta:
         abstract = True
