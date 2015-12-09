@@ -42,7 +42,6 @@ var language_codes = {
 };
 
 
-
 function custom_file_browser(field_name, url, type, win) {
 
     var cmsURL = window.__admin_url + 'filebrowser/browse/' + '?pop=2';
@@ -51,7 +50,7 @@ function custom_file_browser(field_name, url, type, win) {
     tinyMCE.activeEditor.windowManager.open({
         title: 'Select ' + type + ' to insert',
         file: cmsURL,
-        width: 800,
+        width: 1000,
         height: 500,
         resizable: 'yes',
         scrollbars: 'yes',
@@ -59,7 +58,11 @@ function custom_file_browser(field_name, url, type, win) {
         close_previous: 'no'
     }, {
         window: win,
-        input: field_name
+        input: field_name,
+        oninsert: function(url) {
+
+          win.document.getElementById(field_name).value = url;
+        }
     });
     return false;
 }
