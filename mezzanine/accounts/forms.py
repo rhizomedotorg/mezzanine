@@ -54,7 +54,14 @@ class LoginForm(Html5Mixin, forms.Form):
         """
         username = self.cleaned_data.get("username")
         password = self.cleaned_data.get("password")
-        self._user = authenticate(username=username, password=password)
+
+        try:
+            self._user = authenticate(username=username, password=password)
+
+        except User.MultipleObjectsReturned:
+            raise forms.ValidationError(
+                             ugettext("There is more than one account associated with this email address. Please enter your username or contact info@rhizome.org if you are still having trouble."))
+
         if self._user is None:
             raise forms.ValidationError(
                              ugettext("Invalid username/email and password"))
@@ -170,6 +177,8 @@ class ProfileForm(Html5Mixin, forms.ModelForm):
         """
         Ensure the email address is not already registered.
         """
+
+        print "cleaning email"
         email = self.cleaned_data.get("email")
         qs = User.objects.exclude(id=self.instance.id).filter(email=email)
         if len(qs) == 0:
@@ -252,6 +261,9 @@ class PasswordResetForm(Html5Mixin, forms.Form):
         username_or_email = Q(username=username) | Q(email=username)
         try:
             user = User.objects.get(username_or_email, is_active=True)
+        except User.MultipleObjectsReturned:
+            raise forms.ValidationError(
+                             ugettext("There is more than one account associated with this email address. Please enter your username or contact info@rhizome.org if you are still having trouble."))
         except User.DoesNotExist:
             raise forms.ValidationError(
                              ugettext("Invalid username/email"))
