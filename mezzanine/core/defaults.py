@@ -292,7 +292,7 @@ register_setting(
     editable=False,
     default=("border", "display", "float", "list-style-type", "margin",
         "margin-bottom", "margin-left", "margin-right", "margin-top",
-        "padding-left", "text-align", "text-decoration", "vertical-align"),
+        "padding-left", "text-align", "text-decoration", "vertical-align","color","background-color"),
 )
 
 register_setting(
