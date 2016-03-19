@@ -74,16 +74,13 @@ if (typeof tinyMCE != 'undefined') {
         selector: "textarea.mceEditor",
         height: '500px',
         width: 768,
-
         language: language_codes[window.__language_code] || 'en',
         plugins: [
             "advlist autolink lists link image charmap print preview anchor",
             "searchreplace visualblocks code fullscreen",
-            "insertdatetime media table contextmenu paste",
-            "textcolor colorpicker"
+            "insertdatetime media table contextmenu paste"
         ],
         link_list: '/displayable_links.js',
-        keep_styles: true,
         relative_urls: false,
         convert_urls: false,
         menubar: false,
@@ -91,7 +88,7 @@ if (typeof tinyMCE != 'undefined') {
         toolbar: ("insertfile undo redo | styleselect | bold italic | " +
                   "alignleft aligncenter alignright alignjustify | " +
                   "bullist numlist outdent indent | link image table | " +
-                  "code fullscreen | forecolor backcolor"),
+                  "code fullscreen"),
         file_browser_callback: custom_file_browser,
         content_css: window.__tinymce_css
     });
